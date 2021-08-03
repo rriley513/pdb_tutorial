@@ -1,25 +1,5 @@
 import Binary_Tree
 
-def preorder_traversal_list(binary_tree):
-
-    traversal = []
-    if binary_tree.root is not None:
-        traversal.append(binary_tree.root)
-
-    if binary_tree.left is not None:
-        if isinstance(binary_tree.left, Binary_Tree.Binary_Tree):
-            traversal.extend(preorder_traversal_list(binary_tree.left))
-        else:
-            traversal.append(binary_tree.left)
-
-    if binary_tree.right is not None:
-        if isinstance(binary_tree.right, Binary_Tree.Binary_Tree):
-            traversal.extend(preorder_traversal_list(binary_tree.right))
-        else:
-            traversal.append(binary_tree.right)
-
-    return traversal
-
 def inorder_traversal_list(binary_tree):
     traversal = []
 
@@ -37,6 +17,26 @@ def inorder_traversal_list(binary_tree):
           traversal.extend(preorder_traversal_list(binary_tree.right))
       else:
           traversal.append(binary_tree.right)
+
+    return traversal
+
+def preorder_traversal_list(binary_tree):
+
+    traversal = []
+    if binary_tree.root is not None:
+        traversal.append(binary_tree.root)
+
+    if binary_tree.left is not None:
+        if isinstance(binary_tree.left, Binary_Tree.Binary_Tree):
+            traversal.extend(preorder_traversal_list(binary_tree.left))
+        else:
+            traversal.append(binary_tree.left)
+
+    if binary_tree.right is not None:
+        if isinstance(binary_tree.right, Binary_Tree.Binary_Tree):
+            traversal.extend(preorder_traversal_list(binary_tree.right))
+        else:
+            traversal.append(binary_tree.right)
 
     return traversal
 
