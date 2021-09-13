@@ -217,7 +217,7 @@ c(ont(inue))
 (Pdb)
 ~~~
 
-##### Extra: Restart and CTRL-C
+##### Aside: Restart and CTRL-C
 *If your program is paused in execution (at a breakpoint) but you don't want to continue running it, you can use `restart` to terminate execution.*
 ~~~
 (Pdb) restart
@@ -226,21 +226,7 @@ Restarting preorder_tree_traversal.py with arguments:
 > C:\Users\rriley1\pdb_tutorial\preorder_tree_traversal.py(1)<module>()
 -> import Binary_Tree
 ~~~
-*Sometimes your program will continue to execute for a while without stopping. You might be stuck in a loop, or you're just doing heavy-duty computation! If you want to force quit/cancel execution you can use `CTRL-C` (hold down the control key, then hit "C") and  it will pause execution and bring up the pdb terminal.)*
-
-*extra exercise:
-*If you have `preorder_tree_traversal.py` currently open in `pdb`, exit using the `q` command, and then follow the example below:
-~~~
-C:\Users\rriley1\pdb_tutorial>python -m pdb bad_1.py
-
-> C:\Users\rriley1\pdb_tutorial\bad_1.py(1)<module>()
--> if __name__ == "__main__":
-(Pdb) c
-# ...
-# ...
-# ... sure is taking a while! Use CTRL-C to quit. pdb will display the current line we're on, but...
-(Pdb) ll # display the entire file we're working on. Were we "stuck", and if so, why?
-~~~
+*Sometimes your program will continue to execute for a while without stopping. You might be stuck in a loop, or you're just doing heavy-duty computation! If you want to force quit/cancel execution you can use `CTRL-C` (hold down the control key, then hit "C") and  it will pause execution and bring up the pdb terminal. We'll practice this at the end of the README*
 
 ## Print (p)
 While we're at a breakpoint, we can examine our variables using the command `p`. This is very useful in debugging! If you can't remember what local variables are available in that frame (function,) use `l` to see the code again.
@@ -298,5 +284,37 @@ The last commands I want to highlight are very important in function calls, part
 > C:\Users\rriley1\pdb_tutorial\preorder_tree_traversal.py(14)preorder_traversal_list()
 -> traversal.extend(preorder_traversal_list(binary_tree.left))
 ~~~
+
+## Overwriting Variable Values
+In pdb, we can also change variable values during execution. Let's look at an example where we might want to overwrite a variable:
+
+If you have `preorder_tree_traversal.py` currently open in `pdb`, exit using the `q` command, and then follow the example below:
+~~~
+C:\Users\rriley1\pdb_tutorial>python -m pdb bad_1.py
+
+> C:\Users\rriley1\pdb_tutorial\bad_1.py(1)<module>()
+-> if __name__ == "__main__":
+(Pdb) c
+# ...
+# ...
+# ... sure is taking a while! Use CTRL-C to stop
+^C
+Program interrupted. (Use 'cont' to resume).
+> /homes/rriley1/pdb_tutorial-master/bad_1.py(5)<module>()
+-> pass
+(Pdb) ll # display the entire file we're working on
+1  ->	if __name__ == "__main__":
+2  	    sentinel = True
+3  	
+4  	    while(sentinel):
+5  	          pass
+
+# it's easy to see here that we're stuck in an infinite loop. Let's overwrite the sentinel variable
+(Pdb) sentinel = True
+(Pdb) c
+The program finished and will be restarted
+~~~
+
+We got out of the infinite loop! As you can see, variables are overwritten with the normal assignment syntax. Beware that variable assignment is only valid within the scope of a function: to test this more, open up `variables.py` and try overwriting the variable values at different stages.
 
 Be sure to try `(Pdb) h` to see a list of all possible commands, and to explore them! Now that you've completed this tutorial, move on to Guided_pdb_tutorial.md for a guided debugging of a broken inorder tree traversal.
