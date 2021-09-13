@@ -310,7 +310,7 @@ Program interrupted. (Use 'cont' to resume).
 5  	          pass
 
 # it's easy to see here that we're stuck in an infinite loop. Let's overwrite the sentinel variable
-(Pdb) sentinel = True
+(Pdb) sentinel = False
 (Pdb) c
 The program finished and will be restarted
 ~~~
