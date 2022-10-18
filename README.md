@@ -3,9 +3,11 @@
 This tutorial will teach you how to use basic python pdb commands, using a
 binary tree traversal example.
 
+Download this repository as a zip, or using a git fork, and navigate to the corresponding directory.
+
 First, run
 ~~~
-c:\Users\rriley1>pdb_tutorial> python preorder_tree_traversal.py
+python preorder_tree_traversal.py
 # [19, 11 5, 3, 2, 7, 13, 17, 41, 23, 43]
 ~~~
 
@@ -17,14 +19,15 @@ To run pdb, you use `-m pdb` before any other arguments, including the file name
 
 Let's try pdb with our tree traversal program:
 ~~~
-c:\Users\rriley1\pdb_tutorial> python -m pdb preorder_tree_traversal.py
+python -m pdb preorder_tree_traversal.py
 ~~~
 
-Your console should print:
+Your console should print the following 
+(note: instead of "C:\pdb_tutorial\", you should see the path to your own current directory)
 
 ~~~
-> c:\Users\rriley1\pdb_tutorial\preorder_tree_traversal.py(1)<module>()
-> import Binary_Tree
+> c:\pdb_tutorial\preorder_tree_traversal.py(1)<module>() 
+-> import Binary_Tree
 (Pdb)
 ~~~
 
@@ -37,24 +40,25 @@ First and foremost, we can use the command `c`  to execute the program (`cont` o
 (Pdb) c
 [19, 11, 5, 3, 2, 7, 13, 17, 41, 23, 43]
 The program finished and will be restarted
->  C:\Users\rriley1\pdb_tutorial\preorder_tree_traversal.py(1)<module>()
-> import Binary_Tree
+>  C:\pdb_tutorial\preorder_tree_traversal.py(1)<module>()
+-> import Binary_Tree
 (Pdb)
 ~~~
 
 And we use `q` to quit pdb (`exit` works as well.)
 ~~~
 (Pdb) q
-C:\Users\rriley1\pdb_tutorial>
+>          # or '$' if you're on linux or mac
 ~~~
 
 To get back to pdb again, re-run
 ~~~
-C:\Users\rriley1\pdb_tutorial> python -m pdb preorder_tree_traversal.py
+python -m pdb preorder_tree_traversal.py
 ~~~
 
 ## List (l)
 The command `list` or `l` will print our current line (1) and the next 10 lines (through line 11) to the console. If we keep pressing `l`, it will print the subsequent 10 lines (12-21), and the next 10 after, until the end of the file (EOF).
+Note: the '->' symbol in pdb means "you are here!"
 ~~~
 (Pdb) l
   1  -> import Binary_Tree
@@ -130,18 +134,18 @@ We can only use `l` to peek inside the file we currently have open (here, preord
 We can specify a breakpoint with the command `b` followed by a line number. Whenever a breakpoint is encountered while running the program, execution pauses and we get the pdb console again.
 ~~~
 (Pdb) b 24 # set a breakpoint at line 24 of the current file
-Breakpoint 1 at C:\Users\rriley1\pdb_tutorial\preorder_tree_traversal.py:24
+Breakpoint 1 at C:\pdb_tutorial\preorder_tree_traversal.py:24 
 (Pdb) c
-> C:\Users\rriley1\pdb_tutorial\preorder_tree_traversal.py(22)preorder_traversal_list()
+> C:\pdb_tutorial\preorder_tree_traversal.py(22)preorder_traversal_list()
 -> return traversal
 ~~~
 We can also make a breakpoint with a function name, and a line in another file:
 ~~~
 (Pdb) b preorder_traversal_list # a function in our current file
-Breakpoint 2 at C:\Users\rriley1\pdb_tutorial\preorder_tree_traversal.py:6
+Breakpoint 2 at C:\pdb_tutorial\preorder_tree_traversal.py:6
 
 (Pdb) b Binary_Tree:20 # a line in another file, the syntax is My_File(.py):line_number
-Breakpoint 3 at C:\Users\rriley1\pdb_tutorial\binary_tree.py:20
+Breakpoint 3 at C:\pdb_tutorial\binary_tree.py:20
 
 (Pdb) b Binary_Tree:build_sample_tree # !! a FUNCTION in ANOTHER file gives us an error, however
 *** Bad lineno: build_sample_tree
@@ -151,10 +155,10 @@ To see a list of all breakpoints, use the command `b` without any arguments. Not
 ~~~
 (Pdb) b
 Num Type         Disp Enb   Where
-1   breakpoint   keep yes   at c:\users\rebecca\documents\haverford\pdb_tutorial\pdb_tutorial\preorder_tree_traversal.py:24
+1   breakpoint   keep yes   at c:\pdb_tutorial\pdb_tutorial\preorder_tree_traversal.py:24
         breakpoint already hit 1 time
-2   breakpoint   keep yes   at c:\users\rebecca\documents\haverford\pdb_tutorial\pdb_tutorial\preorder_tree_traversal.py:6
-3   breakpoint   keep yes   at c:\users\rebecca\documents\haverford\pdb_tutorial\pdb_tutorial\binary_tree.py:20
+2   breakpoint   keep yes   at c:\pdb_tutorial\pdb_tutorial\preorder_tree_traversal.py:6
+3   breakpoint   keep yes   at c:\pdb_tutorial\pdb_tutorial\binary_tree.py:20
 ~~~
 
 *Extra: Recall that `ll` will display the current function or frame. Last time we weren't in a function, so it listed the entire file. Now we're inside a function (`preorder_traversal_list`), so try `ll` again. It should only display the function implementation (the function code), this time.*
@@ -172,7 +176,7 @@ Let's do some examples:
 ~~~
  # pause execution at line 14 only if the `traversal` list is empty
 (Pdb) b 14, len(traversal) == 0
-Breakpoint 4 at C:\Users\rriley1\pdb_tutorial\preorder_tree_traversal.py:14
+Breakpoint 4 at C:\pdb_tutorial\preorder_tree_traversal.py:14
 
 # breakpoint 1 will now only pause execution if the `traversal` list has two or more elements
 (Pdb) condition 1 len(traversal) > 1
@@ -190,11 +194,11 @@ If you're totally done with a breakpoint, you can delete it with the command `cl
 ~~~
 # delete a breakpoint with its corresponding number
 (Pdb) cl 4
-Deleted breakpoint 4 at C:\Users\rriley1\pdb_tutorial\preorder_tree_traversal.py:14
+Deleted breakpoint 4 at C:\pdb_tutorial\preorder_tree_traversal.py:14
 
 # make a new breakpoint, notice that it's #5, not #4. We don't recycle breakpoint numbers.
 (Pdb) b 1
-Breakpoint 5 at C:\Users\rriley1\pdb_tutorial\preorder_tree_traversal.py:1
+Breakpoint 5 at C:\pdb_tutorial\preorder_tree_traversal.py:1
 
 # delete a breakpoint by giving its file and line number
 (Pdb) cl preorder_tree_traversal.py:1
@@ -223,7 +227,7 @@ c(ont(inue))
 (Pdb) restart
 Restarting preorder_tree_traversal.py with arguments:
         preorder_tree_traversal.py
-> C:\Users\rriley1\pdb_tutorial\preorder_tree_traversal.py(1)<module>()
+> C:\pdb_tutorial\preorder_tree_traversal.py(1)<module>()
 -> import Binary_Tree
 ~~~
 *Sometimes your program will continue to execute for a while without stopping. You might be stuck in a loop, or you're just doing heavy-duty computation! If you want to force quit/cancel execution you can use `CTRL-C` (hold down the control key, then hit "C") and  it will pause execution and bring up the pdb terminal. We'll practice this at the end of the README*
@@ -263,13 +267,13 @@ We can also use functions and computations here!
 ## Up (u) and Down (d)
 The last commands I want to highlight are very important in function calls, particularly in recursion or multi-layer abstractions. The command `u` moves us up the stack (to the function call that put us where we are now) and `d` moves us back down the stack. Run `python -m pdb preorder_tree_traversal.py`, set a breakpoint at line 24 (`b 24`) and then use `c` (continue) if you aren't already at `preorder_tree_traversal.py` line 24.
 ~~~
-> C:\Users\rriley1\pdb_tutorial\preorder_tree_traversal.py(24)preorder_traversal_list()
+> C:\pdb_tutorial\preorder_tree_traversal.py(24)preorder_traversal_list()
 -> return traversal
 # go up the stack!
 (Pdb) u
 
 # this means line 14 called preorder_traversal_list, and that function call hit the breakpoint at line 24
-> C:\Users\rriley1\pdb_tutorial\preorder_tree_traversal.py(14)preorder_traversal_list()
+> C:\pdb_tutorial\preorder_tree_traversal.py(14)preorder_traversal_list()
 -> traversal.extend(preorder_traversal_list(binary_tree.left))
 
 (Pdb) u # keep going up
@@ -277,11 +281,11 @@ The last commands I want to highlight are very important in function calls, part
 # because line 14 is the first recursive call, we're here for a while. Continue to use the command `u` (just hitting enter will use your last command as well) until you get to a different line.
 
 # this is the original function call!
-> C:\Users\rriley1\pdb_tutorial\preorder_tree_traversal.py(33)<module>()
+> C:\pdb_tutorial\preorder_tree_traversal.py(33)<module>()
 -> print(preorder_traversal_list(my_tree))
 
 (Pdb) d # let's go back down
-> C:\Users\rriley1\pdb_tutorial\preorder_tree_traversal.py(14)preorder_traversal_list()
+> C:\pdb_tutorial\preorder_tree_traversal.py(14)preorder_traversal_list()
 -> traversal.extend(preorder_traversal_list(binary_tree.left))
 ~~~
 
@@ -290,9 +294,9 @@ In pdb, we can also change variable values during execution. Let's look at an ex
 
 If you have `preorder_tree_traversal.py` currently open in `pdb`, exit using the `q` command, and then follow the example below:
 ~~~
-C:\Users\rriley1\pdb_tutorial>python -m pdb bad_1.py
+python -m pdb bad_1.py
 
-> C:\Users\rriley1\pdb_tutorial\bad_1.py(1)<module>()
+> C:\pdb_tutorial\bad_1.py(1)<module>()
 -> if __name__ == "__main__":
 (Pdb) c
 # ...
@@ -300,7 +304,7 @@ C:\Users\rriley1\pdb_tutorial>python -m pdb bad_1.py
 # ... sure is taking a while! Use CTRL-C to stop
 ^C
 Program interrupted. (Use 'cont' to resume).
-> /homes/rriley1/pdb_tutorial-master/bad_1.py(5)<module>()
+> C:/pdb_tutorial-master/bad_1.py(5)<module>()
 -> pass
 (Pdb) ll # display the entire file we're working on
 1  ->	if __name__ == "__main__":
