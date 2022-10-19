@@ -295,25 +295,31 @@ In pdb, we can also change variable values during execution. Let's look at an ex
 If you have `preorder_tree_traversal.py` currently open in `pdb`, exit using the `q` command, and then follow the example below:
 ~~~
 python -m pdb bad_1.py
-
+~~~
+You should see the following:
+~~~
 > C:\pdb_tutorial\bad_1.py(1)<module>()
 -> if __name__ == "__main__":
 (Pdb) c
-# ...
-# ...
-# ... sure is taking a while! Use CTRL-C to stop
+~~~
+... This program is taking quite long time to finish, isn't it? Use CTRL-C to stop. You should see:
+~~~
 ^C
 Program interrupted. (Use 'cont' to resume).
 > C:/pdb_tutorial-master/bad_1.py(5)<module>()
 -> pass
-(Pdb) ll # display the entire file we're working on
+~~~
+Use the command `ll` (long list) to display the entire file we're working on.
+~~~
+(Pdb) ll
 1  ->	if __name__ == "__main__":
 2  	    sentinel = True
 3  	
 4  	    while(sentinel):
 5  	          pass
-
-# it's easy to see here that we're stuck in an infinite loop. Let's overwrite the sentinel variable
+~~~
+It's easy to see here that we're stuck in an infinite loop. Let's overwrite the `sentinel` variable with the following commands:
+~~~
 (Pdb) sentinel = False
 (Pdb) c
 The program finished and will be restarted
