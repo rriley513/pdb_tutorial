@@ -234,20 +234,26 @@ Restarting preorder_tree_traversal.py with arguments:
 
 ## Print (p)
 While we're at a breakpoint, we can examine our variables using the command `p`. This is very useful in debugging! If you can't remember what local variables are available in that frame (function,) use `l` to see the code again.
-Here are some examples (run `python -m pdb preorder_tree_traversal.py`, set a breakpoint at line 24-- `b 24`-- and then use `c` (continue) to get these results):
+Here are some examples (run `python -m pdb preorder_tree_traversal.py`, set a breakpoint at line 18-- `b 18`-- and then use `c` (continue) to get these results):
 ~~~
 (Pdb) p traversal # a variable local to our function
 [3, 2]
+
 (Pdb) p binary_tree.root # an attribute of a local variable
 3
+
 (Pdb) p binary_tree.left
 2
+
 (Pdb) p binary_tree.right
 None
+
 (Pdb) p binary_tree # string representation of a custom class
 <Binary_Tree.Binary_Tree object at 0x000001FC27A8CF40>
+
 (Pdb) p GLOBAL_VARIABLE # we can also see global variables!
 'You found a global variable!'
+
 (Pdb) p nonexistent_variable # throws an error
 *** NameError: name 'nonexistent_variable' is not defined
 ~~~
