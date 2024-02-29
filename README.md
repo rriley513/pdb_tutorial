@@ -32,7 +32,7 @@ Your console should print the following
 ~~~
 
 The first line refers to your literal location: the file path, and then the line number. The (1) means we're at the first line of the file: pdb always starts at the first line.
-The next line is the contents of our current line (namely, line 1). We can see that we're importing a python class named Binary_Tree.
+The next line is the contents of our current line (namely, line 1). We can see that we're importing a python class named _"Binary_Tree"_.
 Lastly, we have the pdb console. This is where we can type commands.
 
 First and foremost, we can use the command `c`  to execute the program (`cont` or `continue` work as well.)
@@ -115,7 +115,7 @@ We can also use arguments to specify what part of which files we want to see:
 ~~~
 (pdb) l 12 # print lines 7-17 of preorder_tree_traversal.py (the 10 lines around line 12)
 ~~~
-You can specify any line number as the first argument. If the line number is less than 7, `l` will always print the first 10 lines, and if the line number is less than 5 lines away from the end of the file, it will print the 5 lines preceeding and as many subsequent lines as it can. Try:
+You can specify any line number as the first argument. If the line number is less than 7, `l` will always print the first 10 lines, and if the line number is less than 5 lines away from the end of the file, it will print the 5 lines preceding and as many subsequent lines as it can. Try:
 ~~~
 (pdb) l 2 # prints lines 1-11
 (pdb) l 25 # prints lines 20-26
